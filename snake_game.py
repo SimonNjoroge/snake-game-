@@ -119,14 +119,6 @@ while trials > 0:
         food_x, food_y = food_position
         pygame.draw.circle(screen, food_color, (food_x * GRID_SIZE + GRID_SIZE // 2, food_y * GRID_SIZE + GRID_SIZE // 2), 7)
 
-        # Display the score
-        font = pygame.font.Font(None, 36)
-        score_text = font.render(f"Score: {score}", True, BLACK)
-        screen.blit(score_text, (10, 10))
-
-        # Draw a border around the score area
-        pygame.draw.rect(screen, BLACK, (0, 0, WIDTH, 50), 2)
-
         # Update the display
         pygame.display.update()
 
@@ -135,15 +127,20 @@ while trials > 0:
 
     # Game over screen
     screen.fill(WHITE)
-    draw_centered_text("Game Over", -50)
 
     if trials > 0:
+        draw_centered_text("Game Over", -50)
         draw_centered_text(f"Trials Remaining: {trials}", 50, color=GREEN)
         draw_centered_text("Press SPACE to Play Again", 100, font_size=24, color=GRAY)
     else:
         no_more_trials_text = font.render("No more trials", True, BLACK)
         no_more_trials_rect = no_more_trials_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 50))
         screen.blit(no_more_trials_text, no_more_trials_rect)
+
+    # Display the score on top
+    font = pygame.font.Font(None, 36)
+    score_text = font.render(f"Score: {score}", True, BLACK)
+    screen.blit(score_text, (10, 10))
 
     pygame.display.update()
 
